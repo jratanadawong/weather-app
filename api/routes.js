@@ -1,34 +1,45 @@
-import { constructApiEndpoint } from './helpers';
+import { constructQuery } from './helpers';
 import path from 'path';
+import axios from 'axios';
 
 const routes = (app) => {
-  const port = 8080;
+  const port = 3080;
   const distAppPath = path.join(__dirname, '..', 'app', 'dist');
   
   // Get current weather
   app.get('/api/weather/:city/current', (req, res) => {
     console.log(`Current weather in ${req.params.city}`);
-    const endPoint = constructApiEndpoint('current', req.params.city);
-    console.log(endPoint);
-    res.json('endpoint');
+    const endPoint = constructQuery('weather', req.params.city);
+    axios.get(endPoint)
+      .then((weather) => {
+        res.json(weather.data);
+      })
+      .catch((err) => {
+        console.log('err: ', err);
+      });
   });
   
   // Get weather forecast
   app.get('/api/weather/:city/forecast', (req, res) => {
     console.log(`Forecasted weather in ${req.params.city}`);
-    const endPoint = constructApiEndpoint('forecast', req.params.city);
-    console.log(endPoint);
-    res.json();
+    const endPoint = constructQuery('forecast', req.params.city);
+    axios.get(endPoint)
+      .then((weather) => {
+        res.json(weather.data);
+      })
+      .catch((err) => {
+        console.log('err: ', err);
+      });
   });
   
-  // Serves up our frontend build
+  // Serves up our frontend build as fallback if you hit the endpoint without a query
   app.get('/', (req, res) => {
     console.log('distAppPath:', distAppPath);
     res.sendFile(path.join(distAppPath, 'index.html'));
   });
 
   app.listen(port, () => {
-    console.log('Server is running');
+    console.log(`Listening on port: :${port}`);
   });
   
 };

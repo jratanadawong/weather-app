@@ -3,7 +3,6 @@ import express from 'express';
 import bodyParser from 'body-parser';
 import path from 'path';
 import routes from './routes';
-import { constructApiEndpoint } from './helpers';
 
 const app = express();
 
