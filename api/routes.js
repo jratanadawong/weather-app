@@ -1,6 +1,6 @@
-import { constructQuery } from './helpers';
 import path from 'path';
 import axios from 'axios';
+import { constructQuery } from './helpers';
 
 const routes = (app) => {
   const port = 3080;
