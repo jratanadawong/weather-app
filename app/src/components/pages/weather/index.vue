@@ -1,11 +1,13 @@
 <template>
   <div class="weather-page-container">
     <Header :city="city" />
-    <span class="last-updated-at">
-      Last updated: {{ lastUpdate }}
-    </span>
-    <WeatherContainer :weather="weather" />
-    <div>See Forecast</div>
+    <div class="weather-page-wrapper">
+      <span class="last-updated-at">
+        Last updated: {{ lastUpdate }}
+      </span>
+      <WeatherContainer :weather="weather" />
+      <div>See Forecast</div>
+      </div>
     <Footer />
   </div>
 </template>
@@ -73,10 +75,16 @@ export default {
 };
 </script>
 <style lang="scss">
+  .weather-page-wrapper {
+    width: 95vw;
+    padding-top: .5em;
+    margin: 0 2.5vw;
+  }
   .last-updated-at {
     display: flex;
     width: 100%;
     align-items: start;
     font-size: .75em;
+    padding-bottom: 2em;
   }
 </style>

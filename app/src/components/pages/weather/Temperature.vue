@@ -10,14 +10,14 @@
 </template>
 
 <script>
-import { convertKelvinToCelsius } from '../../../helpers';
+import { convertKelvinToC } from '../../../helpers';
 export default {
   name: 'Temperature',
   props: ['temperature'],
   computed: {
     celsius() {
       // Convert to celsius and round
-      return Math.round(convertKelvinToCelsius(this.$props.temperature));
+      return Math.round(convertKelvinToC(this.$props.temperature));
     }
   },
 };

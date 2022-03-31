@@ -1,5 +1,8 @@
 <template>
   <div class="weather-container">
+    <span class="forecast-day">
+      {{ forecastDay }}
+    </span>
     <span class="forecast-date">
       {{ forecastDate }}
     </span>
@@ -25,8 +28,11 @@ export default {
   },
   props: ['weather'],
   computed: {
-    forecastDate() {
+    forecastDay() {
       return getDay(this.$props.weather.dt);
+    },
+    forecastDate(date) {
+      return new Date(this.$props.weather.dt * 1000).toLocaleDateString("en-US");
     },
   },
   data() {
@@ -43,10 +49,13 @@ export default {
     width: fit-content;
     padding: .5em;
     // remove before submitting -- used for examining styling quickly
-    border: 1px solid black;
-    .forecast-date {
+    border: 5px solid black;
+    .forecast-day {
       font-weight: bold;
       font-size: 1.25em;
+    }
+    .forecast-date {
+      font-size: .75em;
     }
     .weather-subcontainer {
       display: flex;
