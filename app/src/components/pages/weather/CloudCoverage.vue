@@ -12,14 +12,11 @@ export default {
   computed: {
     // Generate the weather icon from the API
     icon() {
+      // I don't want to host the icons myself, and this is the lowest level component that'll use this
+      // icon, so it's going to use a static URL. If I used this in more than one place I'd use a const to
+      // determine the image path
       return `http://openweathermap.org/img/wn/${this.$props?.coverage?.icon}@2x.png`;
     },
-  },
-  data: () => {
-    return {
-    }
-  },
-  components: {
   },
 };
 </script>

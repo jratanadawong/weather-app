@@ -76,6 +76,8 @@ export default {
 </script>
 <style lang="scss">
   .weather-page-wrapper {
+    display: flex;
+    flex-flow: row nowrap;
     width: 95vw;
     padding-top: .5em;
     margin: 0 2.5vw;

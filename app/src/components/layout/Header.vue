@@ -2,16 +2,19 @@
   <div class="header">
     <div class="header-container">
       <h1>Weather Forecast</h1>
-      {{ city }}
+      <Selector />
     </div>
   </div>
 </template>
 
 <script>
+import Selector from '../ui/Selector';
+
 export default {
   name: 'Header',
   props: ['city'],
   components: {
+    Selector,
   }
 }
 </script>
