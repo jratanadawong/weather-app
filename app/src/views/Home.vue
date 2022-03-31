@@ -13,3 +13,9 @@ export default {
   }
 }
 </script>
+<style lang="scss">
+  .home {
+    padding: 0;
+    margin: 0;
+  }
+</style>
