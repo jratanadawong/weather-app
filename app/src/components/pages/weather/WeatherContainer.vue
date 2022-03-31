@@ -1,8 +1,8 @@
 <template>
   <div class="weather-container">
-  <span class="last-updated-at">
-    Last updated: {{ lastUpdate }}
-  </span>
+    <span class="forecast-date">
+      {{ forecastDate }}
+    </span>
     <div class="weather-subcontainer">
       <Temperature :temperature="weather.main.temp" />
       <CloudCoverage :coverage="weather.weather[0]" />
@@ -15,6 +15,7 @@
 import CloudCoverage from './CloudCoverage';
 import Temperature from './Temperature';
 import WindSpeed from './WindSpeed';
+import { getDay } from '../../../helpers';
 
 export default {
   name: 'WeatherContainer',
@@ -23,9 +24,13 @@ export default {
     Temperature,
   },
   props: ['weather'],
+  computed: {
+    forecastDate() {
+      return getDay(this.$props.weather.dt);
+    },
+  },
   data() {
     return {
-      lastUpdate: new Date().toLocaleDateString("en-US", {hour: "numeric", minute: "numeric", second: "numeric"}),
     }
   }
 };
@@ -37,11 +42,11 @@ export default {
     align-items: center;
     width: fit-content;
     padding: .5em;
-    .last-updated-at {
-      display: flex;
-      width: 100%;
-      align-items: start;
-      font-size: .75em;
+    // remove before submitting -- used for examining styling quickly
+    border: 1px solid black;
+    .forecast-date {
+      font-weight: bold;
+      font-size: 1.25em;
     }
     .weather-subcontainer {
       display: flex;
@@ -53,6 +58,7 @@ export default {
       font-weight: bold;
       padding: .5em 0;
       width: 100%;
+      cursor: pointer;
     }
   }
   .weather-wrapper {

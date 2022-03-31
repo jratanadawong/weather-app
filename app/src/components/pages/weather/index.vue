@@ -1,6 +1,9 @@
 <template>
   <div class="weather-page-container">
     <Header :city="city" />
+    <span class="last-updated-at">
+      Last updated: {{ lastUpdate }}
+    </span>
     <WeatherContainer :weather="weather" />
     <div>See Forecast</div>
     <Footer />
@@ -16,6 +19,7 @@ export default {
   name: 'Weather',
   data: () => {
     return {
+      lastUpdate: new Date().toLocaleDateString("en-US", {hour: "numeric", minute: "numeric", second: "numeric"}),
       city: 'Toronto',
       weather: {
         "coord": {
@@ -46,7 +50,7 @@ export default {
         "clouds":{
           "all":67
         },
-        "dt":1648750249,
+        "dt":1648861509,
         "sys":{
           "type":2,
           "id":2043365,
@@ -68,3 +72,11 @@ export default {
   },
 };
 </script>
+<style lang="scss">
+  .last-updated-at {
+    display: flex;
+    width: 100%;
+    align-items: start;
+    font-size: .75em;
+  }
+</style>
