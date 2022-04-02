@@ -1,23 +1,24 @@
 <template>
-  <div class="header">
-    <div class="header-container">
-      <h1>Weather Forecast</h1>
-      <Selector />
-    </div>
+<div class="header">
+  <div class="header-container">
+    <h1>Weather Forecast</h1>
+    <CitySelector />
   </div>
+</div>
 </template>
 
 <script>
-import Selector from '../ui/Selector';
+import CitySelector from '../pages/weather/CitySelector';
 
 export default {
   name: 'Header',
   props: ['city'],
   components: {
-    Selector,
+    CitySelector,
   }
 }
 </script>
+
 <style lang="scss">
 .header {
   display: flex;
@@ -29,6 +30,7 @@ export default {
   height: 5em;
   background-color: lightgrey;
   padding: 0 2.5vw;
+
   .header-container {
     display: flex;
     width: 95vw;

@@ -13,12 +13,23 @@
 </template>
 
 <script>
+import axios from 'axios';
 import WeatherContainer from './WeatherContainer';
 import Header from '../../layout/Header';
 import Footer from '../../layout/Footer';
 
 export default {
   name: 'Weather',
+  mounted() {
+    console.log('mounted');
+    axios.get('http://localhost:3080/api/weather/toronto/current')
+      .then((res) => {
+        console.log("res: ", res);
+      })
+      .catch((err) => {
+        console.log('error: ', err);
+      });
+  },
   data: () => {
     return {
       lastUpdate: new Date().toLocaleDateString("en-US", {hour: "numeric", minute: "numeric", second: "numeric"}),
@@ -76,7 +87,7 @@ export default {
 </script>
 <style lang="scss">
   .weather-page-wrapper {
-    display: flex;
+    // display: flex;
     flex-flow: row nowrap;
     width: 95vw;
     padding-top: .5em;

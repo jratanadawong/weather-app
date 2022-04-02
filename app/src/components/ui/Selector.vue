@@ -1,13 +1,22 @@
 <template>
-  <select id="cities">
-  <option value="6167865">Toronto</option>
-  <option value="6094817">Ottawa</option>
-  <option value="1850147">Tokyo</option>
+  <select
+    id="selector"
+    @input="$emit('update', $event.target.value)"
+  >
+    <option
+      v-for="option in options"
+      :key="option.value"
+      :value="option.value"
+    >
+      {{ option.label }}
+    </option>
   </select>
 </template>
 <script>
 export default {
   name: 'Selector',
+  props: ['options', "modelValue"],
+  emits: ['update'],
 }
 </script>
 <style lang="scss">

@@ -12,6 +12,7 @@ const routes = (app) => {
     const endPoint = constructQuery('weather', req.params.city);
     axios.get(endPoint)
       .then((weather) => {
+        console.log('weather.data: ', weather.data);
         res.json(weather.data);
       })
       .catch((err) => {
@@ -34,7 +35,6 @@ const routes = (app) => {
   
   // Serves up our frontend build as fallback if you hit the endpoint without a query
   app.get('/', (req, res) => {
-    console.log('distAppPath:', distAppPath);
     res.sendFile(path.join(distAppPath, 'index.html'));
   });
 
