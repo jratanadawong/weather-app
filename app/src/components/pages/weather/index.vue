@@ -15,7 +15,7 @@
 <script>
 import axios from 'axios';
 import { mapState } from 'vuex';
-import WeatherContainer from './WeatherContainer';
+import WeatherContainer from '../../common/WeatherCard';
 import Header from '../../layout/Header';
 import Footer from '../../layout/Footer';
 
