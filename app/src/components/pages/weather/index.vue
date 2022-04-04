@@ -49,12 +49,14 @@ export default {
       const filteredList = weather?.list.filter((value, index, arr) => ((index + 1) % 8 == 0));
       return filteredList;
     },
+    // formats the current weather to move the nested weather value to align better with the data that forecasts returns, because for some reason the current weather is an array?
     formatCurrentWeather(weather) {
       return {
         ...weather,
         weather: weather.weather[0],
       }
     },
+    // Hits our API to get the weather data
     getWeather() {
       axios.get(this.apiEndpoint)
         .then((res) => {
@@ -72,6 +74,7 @@ export default {
           console.log('error: ', err);
         });
     },
+    // When forecast is updated, update the lastUpdated date, and hide the forecast button
     toggleForecast() {
       this.updateLastUpdated();
       this.viewForecast();
@@ -79,7 +82,7 @@ export default {
   },
   watch: {
     apiEndpoint(oldVal, newVal) {
-      // When the endpoint changes (because the city or forecast type changed), update the weather
+      // Update the weather when the endpoint changes (because the city or forecast type changed)
       if (oldVal !== newVal) { this.getWeather() }
     }
   },

@@ -24,7 +24,7 @@ export default {
   data() {
     return {
       modelValue: "Toronto",
-      // can be moved to constants somewhere
+      // can be moved to constants somewhere at some point
       options: [
         {
           value: "toronto",

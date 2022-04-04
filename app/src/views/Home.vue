@@ -6,12 +6,13 @@
 
 <script>
 import Weather from '../components/pages/weather';
+
 export default {
   name: 'Home',
   components: {
     Weather,
   }
-}
+};
 </script>
 <style lang="scss">
   .home {
