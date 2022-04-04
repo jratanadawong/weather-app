@@ -46,7 +46,7 @@ export default {
     display: flex;
     flex-direction: column;
     align-items: center;
-    width: fit-content;
+    width: 11.5em;
     padding: .5em;
     // remove before submitting -- used for examining styling quickly
     border: 5px solid black;

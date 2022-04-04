@@ -9,35 +9,37 @@
 </template>
 <script>
 import Selector from '../../ui/Selector';
+
 export default {
   name: 'CitySelector',
   components: {
     Selector,
   },
+  mounted() {
+    console.log('this.$store.city on mount: ', this.$store.city);
+  },
   methods: {
     updateCity(city) {
-      console.log("Updating!");
-      console.log("modelValue: ", this.modelValue);
-      console.log("city: ", city);
+      this.$store.commit('setCity', city);
+      console.log("this.$store.city: ", this.$store.city);
       this.modelValue = city;
-    }
+    },
   },
   data() {
     return {
-      modelValue: "6167865",
+      modelValue: "Toronto",
       // Move these options to enum later
       options: [
         {
-          value: "6167865",
+          value: "toronto",
           label: "Toronto",
-          default: true,
         },
         {
-          value: "6094817",
+          value: "ottawa",
           label: "Ottawa",
         },
         {
-          value: "1850147",
+          value: "tokyo",
           label: "Tokyo",
         },
       ],

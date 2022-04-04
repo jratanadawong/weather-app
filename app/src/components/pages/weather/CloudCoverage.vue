@@ -28,6 +28,7 @@ export default {
     }
     .coverage-description {
       font-size: .75em;
+      max-width: 8em;
       font-style: italic;
       text-transform: capitalize;
     }
