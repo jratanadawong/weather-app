@@ -48,4 +48,9 @@ export default {
 }
 </script>
 <style lang="scss">
+  .city-selector {
+    width: 10em;
+    display: flex;
+    justify-content: flex-end;
+  }
 </style>

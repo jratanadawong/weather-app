@@ -3,7 +3,7 @@
     <Header :city="city" />
     <div class="weather-page-wrapper">
       <span class="last-updated-at">
-        Last updated: {{ lastUpdate }}
+        Last updated: {{ lastUpdated }}
       </span>
       <div class="weather-card-container">
         <template v-if="isForecast === false">
@@ -34,10 +34,11 @@ import Header from '../../layout/Header';
 export default {
   name: 'Weather',
   mounted() {
+    this.updateLastUpdated();
     this.getWeather();
   },
   methods: {
-    ...mapMutations(['viewForecast']),
+    ...mapMutations(['viewForecast', 'updateLastUpdated']),
     getWeather() {
       console.log('apiEndpoint: ', this.apiEndpoint);
       axios.get(this.apiEndpoint)
@@ -51,6 +52,7 @@ export default {
     },
     toggleForecast() {
       this.isForecast = true;
+      this.updateLastUpdated();
       this.viewForecast();
     }
   },
@@ -60,14 +62,13 @@ export default {
     }
   },
   computed: {
-    ...mapState(['city', 'forecastType']),
+    ...mapState(['city', 'forecastType', 'lastUpdated']),
     apiEndpoint() {
       return `http://localhost:3080/api/weather/${this.city}/${this.forecastType}`;
     },
   },
   data: () => {
     return {
-      lastUpdate: new Date().toLocaleDateString("en-US", {hour: "numeric", minute: "numeric", second: "numeric"}),
       weather: { dt: 0 },
       isForecast: false,
     }

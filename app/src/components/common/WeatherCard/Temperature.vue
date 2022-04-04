@@ -24,6 +24,7 @@ export default {
 </script>
 <style lang="scss">
   .temperature-container {
+    max-width:50%;
     .temperature-reading {
       display: flex;
       flex-flow: row;

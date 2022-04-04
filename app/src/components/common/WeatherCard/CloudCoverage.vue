@@ -22,13 +22,13 @@ export default {
 </script>
 <style lang="scss">
   .cloud-coverage-container {
+    max-width: 50%;
     .weather-icon {
       height: 4.25em;
       width: 4.25em;
     }
     .coverage-description {
       font-size: .75em;
-      max-width: 8em;
       font-style: italic;
       text-transform: capitalize;
     }

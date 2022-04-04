@@ -13,7 +13,12 @@ const getDay = (date) => {
   }
 };
 
+const lastUpdatedAt = () => {
+  return new Date().toLocaleDateString("en-US", {hour: "numeric", minute: "numeric", second: "numeric"});
+}
+
 export {
   isToday,
   getDay,
+  lastUpdatedAt,
 };

@@ -60,6 +60,8 @@ export default {
     .weather-subcontainer {
       display: flex;
       flex-flow: row wrap;
+      width: 100%;
+      justify-content: center;
     }
     .weather-details {
       font-size: .75em;

@@ -1,10 +1,10 @@
 import { convertKelvinToC, convertKelvinToF } from "./temperature";
-import { isToday, isTomorrow, getDay } from "./datetime";
+import { isToday, getDay, lastUpdatedAt } from "./datetime";
 
 export {
   convertKelvinToC,
   convertKelvinToF,
   isToday,
-  isTomorrow,
   getDay,
+  lastUpdatedAt,
 };

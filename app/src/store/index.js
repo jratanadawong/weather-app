@@ -9,6 +9,7 @@ export default new Vuex.Store({
     cityId: 6167865,
     city: "toronto",
     forecastType: "current",
+    lastUpdated: null,
   },
   mutations,
   actions: {
