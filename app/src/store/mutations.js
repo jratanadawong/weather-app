@@ -3,9 +3,11 @@ import { lastUpdatedAt } from "../helpers";
 const setCity = (state, val) => {
   state.city = val;
 };
+const setForecastType = (state, val) => {
+  state.forecastType = val;
+};
 
 const viewForecast = (state) => {
-  console.log('forecastType: ', state.forecastType);
   state.forecastType = "forecast";
 };
 
@@ -15,6 +17,7 @@ const updateLastUpdated = (state) => {
 
 export const mutations = {
   setCity,
+  setForecastType,
   viewForecast,
   updateLastUpdated,
 };

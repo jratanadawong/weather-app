@@ -15,20 +15,16 @@ export default {
   components: {
     Selector,
   },
-  mounted() {
-    console.log('this.$store.city on mount: ', this.$store.city);
-  },
   methods: {
     updateCity(city) {
-      this.$store.commit('setCity', city);
-      console.log("this.$store.city: ", this.$store.city);
+      this.$store.dispatch('updateCity', city);
       this.modelValue = city;
     },
   },
   data() {
     return {
       modelValue: "Toronto",
-      // Move these options to enum later
+      // can be moved to constants somewhere
       options: [
         {
           value: "toronto",

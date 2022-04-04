@@ -8,11 +8,9 @@ const routes = (app) => {
   
   // Get current weather
   app.get('/api/weather/:city/current', (req, res) => {
-    console.log(`Current weather in ${req.params.city}`);
     const endPoint = constructQuery('weather', req.params.city);
     axios.get(endPoint)
       .then((weather) => {
-        console.log('weather.data: ', weather.data);
         res.json(weather.data);
       })
       .catch((err) => {
@@ -22,7 +20,6 @@ const routes = (app) => {
   
   // Get weather forecast
   app.get('/api/weather/:city/forecast', (req, res) => {
-    console.log(`Forecasted weather in ${req.params.city}`);
     const endPoint = constructQuery('forecast', req.params.city);
     axios.get(endPoint)
       .then((weather) => {

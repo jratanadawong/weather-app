@@ -17,8 +17,13 @@ const lastUpdatedAt = () => {
   return new Date().toLocaleDateString("en-US", {hour: "numeric", minute: "numeric", second: "numeric"});
 }
 
+const formatDateTime = (date) => {
+  return new Date(date).toLocaleDateString("en-US", {hour: "numeric", minute: "numeric", second: "numeric"});
+}
+
 export {
   isToday,
   getDay,
   lastUpdatedAt,
+  formatDateTime,
 };

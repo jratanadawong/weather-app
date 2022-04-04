@@ -1,5 +1,5 @@
 <template>
-  <div class="weather-container">
+  <div class="weather-card">
     <span class="forecast-day">
       {{ forecastDay }}
     </span>
@@ -10,7 +10,7 @@
       <Temperature :temperature="weather.main.temp" />
       <CloudCoverage :coverage="weather.weather[0]" />
     </div>
-    <span class="weather-details">View details</span>
+    <WeatherDetails :weather="weather" />
   </div>
 </template>
 
@@ -18,37 +18,37 @@
 import CloudCoverage from './CloudCoverage';
 import Temperature from './Temperature';
 import WindSpeed from './WindSpeed';
-import { getDay } from '../../../helpers';
+import WeatherDetails from './WeatherDetails';
+import { getDay, formatDateTime } from '../../../helpers';
 
 export default {
-  name: 'WeatherContainer',
+  name: 'WeatherCard',
   components: {
     CloudCoverage,
     Temperature,
+    WeatherDetails,
+  },
+  mounted() {
+    console.log("weather card: ", this.$props.weather);
   },
   props: ['weather'],
   computed: {
     forecastDay() {
-      return getDay(this.$props.weather.dt);
+      return getDay(this.$props?.weather?.dt || this.$props.weather);
     },
     forecastDate(date) {
-      return new Date(this.$props.weather.dt * 1000).toLocaleDateString("en-US");
+      return formatDateTime(this.$props.weather.dt * 1000);
     },
   },
-  data() {
-    return {
-    }
-  }
 };
 </script>
 <style lang="scss">
-  .weather-container {
+  .weather-card {
     display: flex;
     flex-direction: column;
     align-items: center;
     width: 11.5em;
     padding: .5em;
-    // remove before submitting -- used for examining styling quickly
     border: 5px solid black;
     .forecast-day {
       font-weight: bold;
@@ -62,14 +62,6 @@ export default {
       flex-flow: row wrap;
       width: 100%;
       justify-content: center;
-    }
-    .weather-details {
-      font-size: .75em;
-      background-color: lightgrey;
-      font-weight: bold;
-      padding: .5em 0;
-      width: 100%;
-      cursor: pointer;
     }
   }
   .weather-wrapper {

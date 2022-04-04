@@ -1,3 +1,3 @@
-import WeatherContainer from './WeatherContainer';
+import WeatherCard from './WeatherCard';
 
-export default WeatherContainer;
+export default WeatherCard;
