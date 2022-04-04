@@ -15,3 +15,5 @@ Enrichments:
 - Associate colour of temperature reading with blue/red depending on how hot/cold
 - Fallback city/id methodology
 - May be worth considering creating a common node_modules to reduce redundancy (Axios)
+- Detail view for weather
+- Build query string for app for shareability

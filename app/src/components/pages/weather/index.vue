@@ -5,19 +5,31 @@
       <span class="last-updated-at">
         Last updated: {{ lastUpdate }}
       </span>
-      <WeatherContainer :key="apiEndpoint" :weather="weather" />
-      <div>See Forecast</div>
+      <div class="weather-card-container">
+        <template v-if="isForecast === false">
+          <WeatherContainer
+            :key="apiEndpoint"
+            :weather="weather"
+          />
+          <div @click="toggleForecast">See Forecast</div>
+        </template>
+        <template v-else-if="isForecast === true">
+          <WeatherContainer
+            v-for="forecast in weather.list"
+            :key="apiEndpoint"
+            :weather="forecast"
+          />
+        </template>
       </div>
-    <Footer />
+      </div>
   </div>
 </template>
 
 <script>
 import axios from 'axios';
-import { mapState } from 'vuex';
+import { mapMutations, mapState } from 'vuex';
 import WeatherContainer from '../../common/WeatherCard';
 import Header from '../../layout/Header';
-import Footer from '../../layout/Footer';
 
 export default {
   name: 'Weather',
@@ -25,42 +37,44 @@ export default {
     this.getWeather();
   },
   methods: {
+    ...mapMutations(['viewForecast']),
     getWeather() {
       console.log('apiEndpoint: ', this.apiEndpoint);
       axios.get(this.apiEndpoint)
         .then((res) => {
+          console.log("res.data: ", res.data);
           this.weather = res.data;
         })
         .catch((err) => {
           console.log('error: ', err);
         });
     },
+    toggleForecast() {
+      this.isForecast = true;
+      this.viewForecast();
+    }
   },
   watch: {
     apiEndpoint(oldVal, newVal) {
-      console.log('oldVal: ', oldVal);
-      console.log('newVal: ', newVal);
       if (oldVal !== newVal) { this.getWeather() }
     }
   },
   computed: {
-    ...mapState(['city']),
+    ...mapState(['city', 'forecastType']),
     apiEndpoint() {
-      console.log("store value");
-      console.log(this.city);
-      return `http://localhost:3080/api/weather/${this.city}/current`;
+      return `http://localhost:3080/api/weather/${this.city}/${this.forecastType}`;
     },
   },
   data: () => {
     return {
       lastUpdate: new Date().toLocaleDateString("en-US", {hour: "numeric", minute: "numeric", second: "numeric"}),
       weather: { dt: 0 },
+      isForecast: false,
     }
   },
   components: {
     WeatherContainer,
     Header,
-    Footer,
   },
 };
 </script>
@@ -69,6 +83,13 @@ export default {
     width: 95vw;
     padding-top: .5em;
     margin: 0 2.5vw;
+    height: calc(100vh - 5.5em);
+    .weather-card-container {
+      display: flex;
+      flex-flow: row wrap;
+      gap: 1em;
+      align-items: center;
+    }
   }
   .last-updated-at {
     display: flex;

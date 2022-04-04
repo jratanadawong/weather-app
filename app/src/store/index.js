@@ -8,6 +8,7 @@ export default new Vuex.Store({
   state: {
     cityId: 6167865,
     city: "toronto",
+    forecastType: "current",
   },
   mutations,
   actions: {
