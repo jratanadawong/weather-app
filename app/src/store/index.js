@@ -6,8 +6,6 @@ import { defaultState } from './defaultState';
 
 Vue.use(Vuex);
 
-console.log('defaultState: ', defaultState);
-
 const state = { ...defaultState };
 
 export default new Vuex.Store({

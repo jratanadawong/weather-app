@@ -48,14 +48,12 @@ export default {
     toggleDetails() { this.viewDetails = !this.viewDetails },
     convertKelvinToC,
   },
-  computed: {
-  }
 };
 </script>
 <style lang="scss">
   .weather-details {
     width: 100%;
-    transition: 0.5s ease;
+    transition: 0.25s ease;
     .weather-detail-item {
       display: flex;
       flex-flow: row nowrap;
@@ -81,7 +79,7 @@ export default {
           border-top: .75em solid black;
           display: inline-block;
           text-align: center;
-          transition: 0.5s ease;
+          transition: 0.25s ease;
         }
       }
     }

@@ -5,8 +5,12 @@
       <span class="last-updated-at">
         Last updated: {{ lastUpdated }}
       </span>
-      <div class="weather-card-container" :class="{'single': !isForecast}">
-        <WeatherContainer
+      <div
+        class="weather-card-container"
+        :class="{'single': !isForecast}"
+        v-if="weather.main || weather.length > 0"
+      >
+        <WeatherCard
           :key="weather.dt"
           :weather="weather"
         />
@@ -14,7 +18,7 @@
           See Forecast
         </div>
         <template v-if="isForecast">
-          <WeatherContainer
+          <WeatherCard
             v-for="forecast in weather"
             :key="forecast.dt"
             :weather="forecast"
@@ -28,7 +32,7 @@
 <script>
 import axios from 'axios';
 import { mapMutations, mapState } from 'vuex';
-import WeatherContainer from '../../common/WeatherCard';
+import WeatherCard from '../../common/WeatherCard';
 import Header from '../../layout/Header';
 
 export default {
@@ -45,6 +49,12 @@ export default {
       const filteredList = weather?.list.filter((value, index, arr) => ((index + 1) % 8 == 0));
       return filteredList;
     },
+    formatCurrentWeather(weather) {
+      return {
+        ...weather,
+        weather: weather.weather[0],
+      }
+    },
     getWeather() {
       axios.get(this.apiEndpoint)
         .then((res) => {
@@ -55,7 +65,7 @@ export default {
               ...this.deduplicateWeather(res.data)
             ]
           } else {
-            this.weather = res.data;
+            this.weather = this.formatCurrentWeather(res.data);
           }
         })
         .catch((err) => {
@@ -81,7 +91,6 @@ export default {
     },
     // the forecastType is used to generate the API url string, so this essentializes it to a boolean for rendering
     isForecast() {
-      console.log('isForecast: ', this.forecastType === "forecast");
       return this.forecastType === "forecast";
     },
   },
@@ -92,7 +101,7 @@ export default {
     }
   },
   components: {
-    WeatherContainer,
+    WeatherCard,
     Header,
   },
 };

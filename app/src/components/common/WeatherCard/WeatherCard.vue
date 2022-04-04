@@ -1,21 +1,20 @@
 <template>
   <div class="weather-card">
-    <span class="forecast-day">
+    <div class="forecast-day">
       {{ forecastDay }}
-    </span>
-    <span class="forecast-date">
+    </div>
+    <div class="forecast-date">
       {{ forecastDate }}
-    </span>
+    </div>
     <div class="weather-subcontainer">
-      <Temperature :v-if="weather.main.temp" :temperature="weather.main.temp" />
-      <CloudCoverage :coverage="weather.weather[0]" />
+      <Temperature :temperature="temperature" />
+      <CloudCoverage :coverage="coverage" />
     </div>
     <WeatherDetails :weather="weather" />
   </div>
 </template>
 
 <script>
-import TransitionExpand from '../../ui/transitions/Expand';
 import CloudCoverage from './CloudCoverage';
 import Temperature from './Temperature';
 import WeatherDetails from './WeatherDetails';
@@ -27,15 +26,21 @@ export default {
     CloudCoverage,
     Temperature,
     WeatherDetails,
-    TransitionExpand,
   },
   props: ['weather'],
   computed: {
     forecastDay() {
-      return getDay(this.$props?.weather?.dt || this.$props?.weather);
+      return getDay(this.$props.weather.dt * 1000);
     },
     forecastDate(date) {
       return formatDateTime(this.$props.weather.dt * 1000);
+    },
+    temperature() {
+      return this.$props.weather.main.temp;
+    },
+    coverage() {
+      // why are these formatted differently in the API?
+      return this.$props.weather.weather[0] || this.$props.weather.weather;
     },
   },
 };
