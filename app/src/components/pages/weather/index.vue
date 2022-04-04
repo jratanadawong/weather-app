@@ -5,12 +5,12 @@
       <span class="last-updated-at">
         Last updated: {{ lastUpdated }}
       </span>
-      <div class="weather-card-container">
+      <div class="weather-card-container" :class="{'single': !isForecast}">
         <WeatherContainer
           :key="weather.dt"
           :weather="weather"
         />
-        <div @click="toggleForecast" v-if="!isForecast">
+        <div class="forecast-button" @click="toggleForecast" v-if="!isForecast">
           See Forecast
         </div>
         <template v-if="isForecast">
@@ -88,7 +88,7 @@ export default {
   data: () => {
     return {
       // default value to ensure that the page renders
-      weather: { dt: 0 },
+      weather: { dt: 1649000000 },
     }
   },
   components: {
@@ -107,7 +107,20 @@ export default {
       display: flex;
       flex-flow: row wrap;
       gap: 1em;
+      justify-content: center;
+      transition: all 0.4s ease-in-out;
+      &.single {
+        justify-content: flex-start;
+      }
+    }
+    .forecast-button {
       align-items: center;
+      height: 100%;
+      cursor: pointer;
+      margin: auto 0;
+      &:hover {
+        text-decoration: underline;
+      }
     }
   }
   .last-updated-at {

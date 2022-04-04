@@ -17,5 +17,6 @@ export default {
   .home {
     padding: 0;
     margin: 0;
+    background-color: #f2f2f2;
   }
 </style>

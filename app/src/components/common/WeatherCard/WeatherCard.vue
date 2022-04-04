@@ -7,7 +7,7 @@
       {{ forecastDate }}
     </span>
     <div class="weather-subcontainer">
-      <Temperature :temperature="weather.main.temp" />
+      <Temperature :v-if="weather.main.temp" :temperature="weather.main.temp" />
       <CloudCoverage :coverage="weather.weather[0]" />
     </div>
     <WeatherDetails :weather="weather" />
@@ -15,9 +15,9 @@
 </template>
 
 <script>
+import TransitionExpand from '../../ui/transitions/Expand';
 import CloudCoverage from './CloudCoverage';
 import Temperature from './Temperature';
-import WindSpeed from './WindSpeed';
 import WeatherDetails from './WeatherDetails';
 import { getDay, formatDateTime } from '../../../helpers';
 
@@ -27,14 +27,12 @@ export default {
     CloudCoverage,
     Temperature,
     WeatherDetails,
-  },
-  mounted() {
-    console.log("weather card: ", this.$props.weather);
+    TransitionExpand,
   },
   props: ['weather'],
   computed: {
     forecastDay() {
-      return getDay(this.$props?.weather?.dt || this.$props.weather);
+      return getDay(this.$props?.weather?.dt || this.$props?.weather);
     },
     forecastDate(date) {
       return formatDateTime(this.$props.weather.dt * 1000);
@@ -48,8 +46,9 @@ export default {
     flex-direction: column;
     align-items: center;
     width: 11.5em;
+    height: min-content;
     padding: .5em;
-    border: 5px solid black;
+    background-color: white;
     .forecast-day {
       font-weight: bold;
       font-size: 1.25em;

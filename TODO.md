@@ -9,3 +9,4 @@ Enrichments:
 - Detail view for weather
 - Build query string for app for shareability
 - Set up webpack to serve up API and app simultaneously for easy testing
+- SCSS root variables to style all components centrally

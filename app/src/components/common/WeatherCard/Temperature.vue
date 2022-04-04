@@ -1,7 +1,7 @@
 <template>
   <div class="weather-wrapper temperature-container">
   <div class="temperature-reading">
-    <span class="temperature-number">
+    <span class="temperature-number" title="average">
       {{ celsius }}
     </span>
     <span class="temperature-metric">°C</span>
