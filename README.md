@@ -9,7 +9,8 @@ From `weather-app/api`, do the following:
 This'll spin up the server on `localhost:3080`  
 
 ## App setup  
-From `weather-app/app`, do the following: 
+From `weather-app/app`, do the following:
+ 
 1.Install the requisite packages:  
 `yarn`
 
